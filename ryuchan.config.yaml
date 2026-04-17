@@ -113,7 +113,7 @@ umami:
 user:
   name: Hex
   description: 希君生羽翼，一化北溟鱼。
-  #site: https://hub.xiaozhangya.xin
+  site: https://hexblog.top
   avatar: /profile.png
   sidebar:
     social:
