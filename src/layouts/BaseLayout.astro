@@ -133,7 +133,89 @@ const bannerSubtitle = pageConfig?.subtitle || "";
   <body
     class="flex flex-col min-h-screen bg-[var(--banner-wave-bg)]"
     {...isIndexed ? { "data-pagefind-body": true } : {}}
-  >
+  ><script>
+(function() {
+  // 检查是否已经显示过启动动效（当前会话中）
+  if (sessionStorage.getItem('splashShown')) {
+    return;
+  }
+  sessionStorage.setItem('splashShown', 'true');
+
+  // 添加动画关键帧
+  if (!document.getElementById('splash-anim-styles')) {
+    const style = document.createElement('style');
+    style.id = 'splash-anim-styles';
+    style.textContent = `
+      @keyframes bounceShake {
+        0% { transform: scale(0.8) translateY(0); opacity: 0; }
+        30% { transform: scale(1.2) translateY(-10px); opacity: 1; }
+        60% { transform: scale(1) translateY(5px); }
+        80% { transform: translateY(-3px); }
+        100% { transform: translateY(0); }
+      }
+      @keyframes fadeInUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  const splash = document.createElement('div');
+  splash.id = 'splash-screen';
+  splash.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 1.2s ease-out;
+    pointer-events: none;
+  `;
+  const text = document.createElement('span');
+  text.style.cssText = `
+    font-size: 6rem;
+    font-weight: bold;
+    color: #000000;
+    font-family: 'Inter', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+    letter-spacing: 0.1em;
+    text-shadow: none;
+    animation: bounceShake 0.8s ease-out;
+    margin-bottom: 2rem;
+  `;
+  text.textContent = '-_Hex';
+  const subText = document.createElement('span');
+  subText.style.cssText = `
+    font-size: 2rem;
+    font-weight: normal;
+    color: #000000;
+    font-family: 'Inter', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+    letter-spacing: 0.05em;
+    text-shadow: none;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out 0.3s forwards;
+  `;
+  subText.textContent = '技术小站';
+  splash.appendChild(text);
+  splash.appendChild(subText);
+  document.body.appendChild(splash);
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      splash.style.opacity = '0';
+      splash.style.transition = 'opacity 0.8s ease-out';
+      splash.addEventListener('transitionend', () => splash.remove(), { once: true });
+    }, 1500);
+  });
+})();
+</script>
     {showBanner && <Banner title={bannerTitle} subtitle={bannerSubtitle} />}
     <Navbar />
     <div class={`max-w-blog mx-auto w-full flex-grow page-content-animate ${showBanner ? 'mt-8' : 'mt-24'}`}>
