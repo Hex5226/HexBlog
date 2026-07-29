@@ -1,0 +1,34 @@
+[
+    {
+        "title": "Style",
+        "artist": "Taylor Swift",
+        "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/fe/57/5f/fe575f85-b843-e190-b043-2605d5f6ec59/14UMGIM34830.rgb.jpg/592x592bb.webp",
+        "url": "https://picbed.xiaozhangya.xin/music/Style%20-%20Taylor%20Swift.flac",
+        "lrc": "https://picbed.xiaozhangya.xin/music/Style%20-%20Taylor%20Swift.lrc",
+        "duration": "03:51"
+    },
+    {
+        "title": "将故事写成我们",
+        "artist": "林俊杰",
+        "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/b4/60/09/b4600934-05dd-b5e6-7d41-46cdb2ac304a/190295343361.jpg/592x592bb.webp",
+        "url": "https://picbed.xiaozhangya.xin/music/%E5%B0%86%E6%95%85%E4%BA%8B%E5%86%99%E6%88%90%E6%88%91%E4%BB%AC%20-%20%E6%9E%97%E4%BF%8A%E6%9D%B0.flac",
+        "lrc": "https://picbed.xiaozhangya.xin/music/%E5%B0%86%E6%95%85%E4%BA%8B%E5%86%99%E6%88%90%E6%88%91%E4%BB%AC%20-%20%E6%9E%97%E4%BF%8A%E6%9D%B0.lrc",
+        "duration": "05:35"
+    },
+    {
+        "title": "Love Story",
+        "artist": "Taylor Swift",
+        "cover": "https://is1-ssl.mzstatic.com/image/thumb/Video124/v4/7d/a3/88/7da388ea-28b6-acde-a2db-3586884bd28e/Job8bd8b474-05f4-47aa-b79e-7876585e3a01-110587237-PreviewImage_preview_image_nonvideo_sdr-Time1617126173244.png/900x900bb.webp",
+        "url": "https://picbed.xiaozhangya.xin/music/Love%20Story%20(Taylor%E2%80%99s%20Version)%20-%20Taylor%20Swift.flac",
+        "lrc": "https://picbed.xiaozhangya.xin/music/Love%20Story%20(Taylor%E2%80%99s%20Version)%20-%20Taylor%20Swift.lrc",
+        "duration": "03:55"
+    },
+    {
+        "title": "可惜没如果",
+        "artist": "林俊杰",
+        "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/57/5a/1b/575a1bc9-ca86-7549-e873-b55663ba6276/4711508105925.jpg/592x592bb.webp",
+        "url": "https://picbed.xiaozhangya.xin/music/%E5%8F%AF%E6%83%9C%E6%B2%A1%E5%A6%82%E6%9E%9C%20-%20%E6%9E%97%E4%BF%8A%E6%9D%B0.mp3",
+        "lrc": "https://picbed.xiaozhangya.xin/music/%E5%8F%AF%E6%83%9C%E6%B2%A1%E5%A6%82%E6%9E%9C%20-%20%E6%9E%97%E4%BF%8A%E6%9D%B0.lrc",
+        "duration": "04:58"
+    }
+]
