@@ -3,7 +3,7 @@ title: 学习笔记：Python
 description: 我本人学习Python时的记录
 pubDate: 2026-07-09
 categories: [学习笔记]
-tags: [学习笔记，编程，编程语言]
+tags: [学习笔记, 编程, 编程语言]
 draft: false
 ---
 # 注意：本文章非教程，仅作记录，若需参考，请自行筛选有用部分
