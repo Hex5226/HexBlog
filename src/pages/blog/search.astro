@@ -23,7 +23,7 @@ import { Icon } from "astro-icon/components";
 
   <BaseCard>
     <div id="search-container" class="w-full">
-      <div id="pagefind-search" transition:persist></div>
+      <div id="pagefind-search"></div>
     </div>
   </BaseCard>
 </BaseLayout>
@@ -34,6 +34,9 @@ import { Icon } from "astro-icon/components";
   function initSearch() {
     const pageFindSearch = document.querySelector("#pagefind-search");
     if (!pageFindSearch) return;
+
+    // 防止 View Transitions 下重复初始化
+    if (pageFindSearch.querySelector(".pagefind-ui")) return;
 
     const params = new URLSearchParams(window.location.search);
 
