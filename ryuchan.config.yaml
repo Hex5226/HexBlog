@@ -13,11 +13,20 @@ site:
     pageSize: 8
   banner:
     enableRandom: true
-    randomUrl: https://t.alcy.cc/ycy
-    randomCount: 5
     height: 60vh
     images:
-      - https://tc.alcy.cc/q/20250908/b2d656670551cb9ea6eda7b46b6c8ec0.webp
+      light:
+        - /banner/light-sky.webp
+        - /banner/light-lavender.webp
+        - /banner/light-mint.webp
+        - /banner/light-peach.webp
+        - /banner/light-rose.webp
+      dark:
+        - /banner/dark-blue-purple.webp
+        - /banner/dark-slate-indigo.webp
+        - /banner/dark-teal-cyan.webp
+        - /banner/dark-rose-amber.webp
+        - /banner/dark-dark-violet.webp
   pages:
     home:
       title: Hex's Blog
@@ -25,8 +34,14 @@ site:
       typewriterTexts:
         - 🌸 欲买桂花同载酒，终不似，少年游！
         - 🌸 花有重开日，人无再少年！
-        #- 🌿 记录生活的点滴，分享美好的瞬间！
         - 📚 纸上得来终觉浅，绝知此事要躬行！
+        - 🌙 人生如逆旅，我亦是行人。
+        - ⭐ 星光不问赶路人，时光不负有心人。
+        - 🏔️ 会当凌绝顶，一览众山小。
+        - 🔥 鲜衣怒马少年时，不负韶华行且知。
+        - ⛰️ 长风破浪会有时，直挂云帆济沧海。
+        - 🎋 千磨万击还坚劲，任尔东西南北风。
+        - 🦅 仰天大笑出门去，我辈岂是蓬蒿人。
     #friend:
       #title: 友人帐
       #subtitle: 记录那些珍贵的友谊，分享彼此的故事

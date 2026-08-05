@@ -24,7 +24,8 @@ export const DATE_FORMAT = config.site.date_format;
 
 // Banner 配置 - 使用安全访问  
 export const BANNER_CONFIG = config.site.banner;
-export const BANNER_IMAGES = config.site.banner?.images || [];
+export const BANNER_IMAGES_LIGHT = config.site.banner?.images?.light || [];
+export const BANNER_IMAGES_DARK = config.site.banner?.images?.dark || [];
 export const BANNER_HEIGHT = config.site.banner?.height || "60vh";
 export const SITE_PAGES = config.site.pages || {};
 // 在现有导出后添加  

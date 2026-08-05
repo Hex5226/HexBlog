@@ -1,6 +1,7 @@
 ---
 import {
-  BANNER_CONFIG,
+  BANNER_IMAGES_LIGHT,
+  BANNER_IMAGES_DARK,
   BANNER_HEIGHT,
   SITE_PAGES,
   TYPEWRITER_TEXTS,
@@ -50,10 +51,11 @@ const hasSubtitle = displaySubtitle !== undefined && displaySubtitle !== "";
 
 const bannerHeight = BANNER_HEIGHT;
 
-// 随机图 API 配置
-const RANDOM_API_URL = BANNER_CONFIG?.randomUrl;
-// 首屏图片：服务端生成一个随机种子，确保每次刷新（或构建）时有一张初始图
-const initialRandomImage = `${RANDOM_API_URL}?t=${Date.now()}`;
+// 随机图配置：light / dark 两套渐变图
+const bannerImagesLight = (BANNER_IMAGES_LIGHT && BANNER_IMAGES_LIGHT.length > 0) ? BANNER_IMAGES_LIGHT : [];
+const bannerImagesDark  = (BANNER_IMAGES_DARK  && BANNER_IMAGES_DARK.length  > 0) ? BANNER_IMAGES_DARK  : [];
+// 构建时用 dark 做默认首图（客户端脚本会根据实际主题立即修正）
+const initialBgImage = bannerImagesDark.length > 0 ? bannerImagesDark[0] : "";
 ---
 
 <div id="banner" class="banner">
@@ -62,7 +64,7 @@ const initialRandomImage = `${RANDOM_API_URL}?t=${Date.now()}`;
     <div 
       id="banner-bg-current"
       class="absolute left-0 top-0 h-full w-full bg-cover bg-center bg-no-repeat z-0 transition-opacity duration-1000"
-      style={{ backgroundImage: `url(${initialRandomImage})` }}
+      style={`background-image: url(${initialBgImage})`}
     ></div>
 
     <!-- 背景层：下一张预加载的图片 (初始隐藏) -->
@@ -211,7 +213,7 @@ const initialRandomImage = `${RANDOM_API_URL}?t=${Date.now()}`;
 </script>
 
 <!-- 随机图轮播脚本 -->
-<script define:vars={{ RANDOM_API_URL }} is:inline>
+<script define:vars={{ bannerImagesLight, bannerImagesDark }} is:inline>
   document.addEventListener("astro:page-load", () => {
     const bgCurrent = document.getElementById("banner-bg-current");
     const bgNext = document.getElementById("banner-bg-next");
@@ -219,15 +221,27 @@ const initialRandomImage = `${RANDOM_API_URL}?t=${Date.now()}`;
     
     if (!bgCurrent || !bgNext || !banner) return;
 
+    // 根据主题获取当前图片集
+    const getThemeImages = () => {
+      const themeType = document.documentElement.getAttribute("data-theme-type");
+      return themeType === "light" ? bannerImagesLight : bannerImagesDark;
+    };
+
+    let bannerImages = getThemeImages();
+    if (!bannerImages || bannerImages.length === 0) return;
+
     // 配置参数
-    const INTERVAL_TIME = 6000; // 轮播间隔 (ms)
-    const TRANSITION_DURATION = 1000; // 切换动画时长 (ms)
+    const INTERVAL_TIME = 6000;
+    const TRANSITION_DURATION = 1000;
     
     let timer = null;
     let isAnimating = false;
 
-    // 生成带随机参数的 URL
-    const getRandomUrl = () => `${RANDOM_API_URL}?t=${Date.now()}`;
+    // 从本地图片列表中随机选取
+    const getRandomImage = () => {
+      const idx = Math.floor(Math.random() * bannerImages.length);
+      return bannerImages[idx];
+    };
 
     // 预加载图片
     const preloadImage = (url) => {
@@ -252,7 +266,7 @@ const initialRandomImage = `${RANDOM_API_URL}?t=${Date.now()}`;
       if (!isBackgroundMode && (rect.bottom < 0 || rect.top > window.innerHeight)) return;
 
       try {
-        const nextUrl = getRandomUrl();
+        const nextUrl = getRandomImage();
         // 开始预加载下一张图
         await preloadImage(nextUrl);
 
@@ -355,11 +369,23 @@ const initialRandomImage = `${RANDOM_API_URL}?t=${Date.now()}`;
       attributeFilter: ["data-banner-mode"]
     });
 
+    // 监听主题切换，更新图片集
+    const themeObserver = new MutationObserver(() => {
+      const newImages = getThemeImages();
+      if (newImages.length === 0) return;
+      bannerImages = newImages;
+    });
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme-type"],
+    });
+
     // 页面卸载时清理
     document.addEventListener("astro:before-swap", () => {
       stopCarousel();
       observer.disconnect();
       modeObserver.disconnect();
+      themeObserver.disconnect();
     }, { once: true });
   });
 </script>
@@ -409,6 +435,22 @@ const initialRandomImage = `${RANDOM_API_URL}?t=${Date.now()}`;
     }
     100% {
       transform: translate3d(85px, 0, 0);
+    }
+  }
+
+  /* 渐变背景缓慢漂移动效 —— 纯 CSS，GPU 加速 */
+  #banner-bg-current,
+  #banner-bg-next {
+    background-size: 120% 120%;
+    animation: gradient-drift 40s ease-in-out infinite alternate;
+  }
+
+  @keyframes gradient-drift {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 100%;
     }
   }
 </style>
