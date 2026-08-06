@@ -22,10 +22,12 @@ export const SITE_FAVICON = config.site.favicon;
 export const SITE_THEME = config.site.theme;
 export const DATE_FORMAT = config.site.date_format;
 
-// Banner 配置 - 使用安全访问  
+// Banner 配置 - 兼容 string[] 与 { light, dark } 两种格式
 export const BANNER_CONFIG = config.site.banner;
-export const BANNER_IMAGES_LIGHT = config.site.banner?.images?.light || [];
-export const BANNER_IMAGES_DARK = config.site.banner?.images?.dark || [];
+const bannerImages = config.site.banner?.images;
+const isLightDark = bannerImages && !Array.isArray(bannerImages);
+export const BANNER_IMAGES_LIGHT = (isLightDark ? bannerImages.light : []) as string[];
+export const BANNER_IMAGES_DARK = (isLightDark ? bannerImages.dark : []) as string[];
 export const BANNER_HEIGHT = config.site.banner?.height || "60vh";
 export const SITE_PAGES = config.site.pages || {};
 // 在现有导出后添加  

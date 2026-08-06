@@ -94,7 +94,7 @@ export interface SiteConfig {
   blog: BlogConfig;
   menu: MenuItem[];
   banner?: {
-    images: string[];
+    images: string[] | { light: string[]; dark: string[] };
     height: string;
     enableRandom?: boolean;
     randomUrl?: string;
