@@ -2,17 +2,27 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
 import ProjectCard from "@/components/mdx/ProjectCard.astro";
+import type { ImageMetadata } from "astro";
+import windowsUpdateToolPreview from "@/assets/windows-update-tool.png";
 
 // 定义项目类型（可选，如果将来添加项目时使用）
 interface Project {
   name: string;
-  avatar: string;
+  avatar: ImageMetadata;
   description: string;
   url: string;
   badge: string;
 }
 
-const projects: Project[] = [];   // 显式声明为空数组，类型为 Project[]
+const projects: Project[] = [
+  {
+    name: "Windows更新管理工具",
+    avatar: windowsUpdateToolPreview,
+    description: "支持暂停与恢复 Windows 系统更新的图形化工具，让系统更新由你掌控。",
+    url: "https://gitee.com/Hex5226/windows-update-tool-source/releases/download/v1.0.1/Windows%E6%9B%B4%E6%96%B0%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7.exe",
+    badge: "v1.0.1",
+  },
+];   // 项目数据
 ---
 
 <BaseLayout title="Projects" isIndexed={false}>

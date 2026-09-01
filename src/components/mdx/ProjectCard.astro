@@ -1,7 +1,9 @@
 ---
+import type { ImageMetadata } from "astro";
+
 export interface ProjectCardProps {
   name: string;
-  avatar: string;
+  avatar: ImageMetadata;
   description: string;
   url: string;
   badge?: string;
@@ -19,17 +21,8 @@ import { Icon } from "astro-icon/components";
   rel="noopener noreferrer"
   class="group block h-full bg-base-100 rounded-2xl border border-base-200 hover:border-primary/40 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden relative"
 >
-  <!-- Badge (右上角) -->
-  {badge && (
-    <div class="absolute top-2 right-2 z-10">
-      <span class="inline-flex items-center px-2 py-0.5 text-[10px] font-medium rounded bg-primary/10 text-primary border border-primary/20">
-        {badge}
-      </span>
-    </div>
-  )}
-
   <div class="p-4 flex flex-col h-full">
-    <!-- 头部：图标 + 标题 -->
+    <!-- 头部：图标 + 标题（与 badge 同行） -->
     <div class="flex items-start gap-3 mb-2">
       <div class="shrink-0">
         <div class="w-14 h-14 rounded-lg bg-base-200/50 p-1 group-hover:bg-primary/10 transition-colors duration-300">
@@ -47,10 +40,17 @@ import { Icon } from "astro-icon/components";
         </div>
       </div>
       
-      <div class="flex-1 min-w-0 pt-0.5">
-        <h3 class="font-bold text-base text-base-content group-hover:text-primary transition-colors truncate flex items-center gap-2">
-          {name}
-        </h3>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-start justify-between gap-2">
+          <h3 class="font-bold text-base text-base-content group-hover:text-primary transition-colors flex-1 min-w-0">
+            {name}
+          </h3>
+          {badge && (
+            <span class="shrink-0 inline-flex items-center px-2 py-0.5 text-[10px] font-medium rounded bg-primary/10 text-primary border border-primary/20 mt-0.5">
+              {badge}
+            </span>
+          )}
+        </div>
         <div class="text-[10px] text-base-content/40 font-mono truncate">
           {new URL(url).hostname}
         </div>
